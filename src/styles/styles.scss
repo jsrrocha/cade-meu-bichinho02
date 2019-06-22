@@ -1,0 +1,230 @@
+/* Theme */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* Reset */
+@import "./reset.scss";
+
+/* Main */
+* {
+  //font-family: Arial, sans-serif;
+  font-family: Roboto,"Helvetica Neue",sans-serif
+}
+mat-grid-tile {
+  background: lightblue;
+}
+agm-map {
+  height: 100%;
+  z-index: 1;
+}
+
+/* Search places result */
+.search-local{
+  .pac-container {
+    width: 305px !important;
+    left: 65px !important;
+    top: 70px !important;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0px 4px 3px 0px #CCC;
+    .pac-item {
+      padding: 8px 5px;
+      &:first-child {
+        border: 0;
+      }
+    }
+  }
+}
+
+.select-local{
+  .pac-container {
+    width: 305px !important;
+
+    padding: 5px;
+    border: 0;
+    box-shadow: 0px 4px 3px 0px #CCC;
+    .pac-item {
+      padding: 8px 5px;
+      &:first-child {
+        border: 0;
+      }
+    }
+  }
+}
+
+/* Plus menu */
+.plus-menu {
+  margin-bottom: 15px;
+  overflow-x: none;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top-color: white;
+    border-bottom: 0;
+    margin-bottom: 4px;
+  }
+}
+
+/**
+ * Swal modal style
+ */
+.swal2-container {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  .swal2-confirm {
+    background-color: #673ab7 !important;
+  }
+  .swal2-title {
+    font-size: 22px !important;
+  }
+  .swal2-content {
+    font-size: 15px;
+  }
+}
+
+.mat-button-toggle-label-content{
+  line-height: 0px !important;
+  padding:0px !important
+}
+
+.mat-dialog-container{
+  padding: 10px 24px 10px 20px   !important;
+}
+
+.mat-datepicker-toggle-default-icon{
+  width: 100% !important;
+}
+
+.mat-form-field .mat-form-field-wrapper{
+  padding-bottom:12px;
+}
+
+.mat-form-field .mat-form-field-underline{
+  bottom: 12px;
+}
+
+/*For select type in search*/
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color:black;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:black;
+}
+
+.mat-icon-button .mat-icon{
+  font-size: 150% !important;
+}
+
+.mat-list-text{
+   display: inline !important;
+}
+
+.mat-card-content{
+  margin-bottom: 0px !important;
+}
+
+.mat-card > :first-child{
+   margin-top: 5px !important;
+}
+
+.search-results{
+  .mat-list-base .mat-list-item.mat-multi-line .mat-list-item-content, .mat-list-base .mat-list-option.mat-multi-line .mat-list-item-content {
+    padding: 5px !important;
+  }
+  .mat-list-base .mat-list-item .mat-list-item-content-reverse, .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+    padding: 0 5px !important;
+  }
+}
+
+.comment {
+  .comment{
+    .mat-form-field-underline {
+      display: none !important;
+    }
+    .mat-form-field-label {
+      font-size: 13px !important;
+      margin: 5px !important;
+    }
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.7;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  .lds-ellipsis {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    top: 27px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 45px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(19px, 0);
+    }
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .pac-container {
+    width: calc(100% - 75px) !important;
+  }
+}
+@media only screen and (max-width:768px) { }
+@media only screen and (max-width:992px) { }
+@media only screen and (max-width: 1382px){ }

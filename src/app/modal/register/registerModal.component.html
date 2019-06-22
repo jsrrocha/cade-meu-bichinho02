@@ -1,0 +1,51 @@
+
+<div mat-dialog-content class = "register" id="register-content"> 
+  <form [formGroup]="formRegister" >
+    <h4 mat-dialog-title>Cadastre-se</h4>  
+      
+      <!-- Name insertion-->
+      <mat-form-field  class="form-style"> 
+       <input matInput formControlName="name" required placeholder="Seu nome">
+
+        <mat-error *ngIf="formRegister.controls.email.invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field> 
+      <br />
+
+      <!-- Email insertion-->
+      <mat-form-field class="form-style">
+        <input matInput formControlName="email" required placeholder="Seu email">
+
+        <mat-error *ngIf="formRegister.controls.email.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <!-- Password insertion-->
+      <mat-form-field class="form-style">
+        <input matInput type="password" formControlName="password" required placeholder="Cadastre uma senha">
+
+        <mat-error *ngIf="formRegister.controls.password.invalid">{{getPassErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Phone insertion--> 
+      <mat-form-field id="ess" class="form-style">   
+        <input matInput formControlName="phone" placeholder="Telefone c/ DDD" required>
+        
+        <mat-error *ngIf="formRegister.controls.phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
+        
+        
+        <mat-button-toggle matSuffix matTooltip="Marque se o telefone possui whats">
+          <mat-slide-toggle formControlName="phoneWithWhats" color="warn" ></mat-slide-toggle> 
+        </mat-button-toggle>
+        <img  matSuffix class="whats-png-icon" src="../assets/icons/whats.png"> 
+       
+      </mat-form-field>
+      
+      <div mat-dialog-actions class="actions">
+       <button mat-raised-button color="primary" class=button type="submit" (click)="addUser()">Cadastrar</button>
+       <button mat-raised-button class="button" (click)="close()">Cancelar</button>
+      </div>
+
+  </form>
+</div>
+
