@@ -1,4 +1,6 @@
-import { Component,Inject, NgZone,ElementRef, OnInit, Input,ViewChild,AfterViewInit } from '@angular/core';
+import { Component,Inject, NgZone,ElementRef,
+         OnInit,Input,ViewChild,
+         AfterViewInit,ChangeDetectorRef } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {FormBuilder,FormControl, FormGroup,Validators} from '@angular/forms';
@@ -8,9 +10,9 @@ import { CookieService } from 'ngx-cookie';
 import swal from 'sweetalert2';
 
 //material
-import { MAT_DIALOG_DATA, MatDialogRef,MatDialog, MatDatepickerModule,
+import { MAT_DIALOG_DATA, MatDialogRef,MatDialog,MatDatepickerModule,
          MatNativeDateModule,MatDialogConfig,MatButtonModule,MatButtonToggleModule,
-         MatIconModule,MatIconRegistry,MatTooltipModule}
+         MatIconModule,MatIconRegistry,MatTooltipModule,MatTooltip}
          from '@angular/material';
 import {DateAdapter, MAT_DATE_FORMATS,MAT_DATE_LOCALE} from '@angular/material/core';
 
@@ -41,7 +43,7 @@ export const MY_FORMATS = {
   ],
 })
 
-export class LostPetModalComponent implements OnInit{
+export class LostPetModalComponent implements OnInit,AfterViewInit{
 
   //Map
   @Input() lat: number = -30.0513678; // default Porto Alegre
@@ -59,11 +61,16 @@ export class LostPetModalComponent implements OnInit{
   photoWithoutHeader64 = null;
   selectedImg= true;
   userLoggedId = null;
-
   petTotal = 0;
   appLoading = false;
   startTime = new Date().getTime(); 
   endTime;
+  
+  @ViewChild('tooltip') 
+  public tooltip: MatTooltip;
+  
+  @ViewChild('tooltipTwo') 
+  public tooltipTwo: MatTooltip;
 
   constructor(
     private dialogRef: MatDialogRef<LostPetModalComponent>,
@@ -72,7 +79,8 @@ export class LostPetModalComponent implements OnInit{
     private mapsAPILoader2: MapsAPILoader,
     private ngZone2: NgZone,
     private cookieService: CookieService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cd: ChangeDetectorRef,
     ){
 
     this.formPetLost = this.formBuilder.group({
@@ -103,6 +111,12 @@ export class LostPetModalComponent implements OnInit{
     setTimeout(()=>{
       this.configureMap();
     }, 30);
+  }
+
+  ngAfterViewInit() {
+     this.tooltip.show();
+     this.tooltipTwo.show();
+     this.cd.detectChanges();
   }
 
   get form() {

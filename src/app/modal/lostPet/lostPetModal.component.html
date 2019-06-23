@@ -21,7 +21,7 @@
 
         <input  id="input-photo" type="file" style="display: none;" (change)="onFileSelected($event)" />
         <label matSuffix for="input-photo">
-           <mat-icon  matTooltip="Clique para escolher">cloud_upload</mat-icon>
+           <mat-icon  matTooltip="Pode ser uma foto de um pet parecido :)" #tooltip="matTooltip" id=photo-icon >cloud_upload</mat-icon> 
         </label>
       </mat-form-field>
 
@@ -128,7 +128,7 @@
     <!-- Local insertion(mockup)-->
     <label class="map-label">Onde ele foi encontrado? Arraste o marcador para o local no mapa:</label>
 
-    <div >
+    <div id=map matTooltip="o botão quadrado deixa em tela cheia" #tooltipTwo="matTooltip">
       <input matInput class="select-local" placeholder="Selecione o local" #search id=searchLocal matTooltip="Selecione o local do pet"> 
       <div id=streetviewMap #streetviewMap class="map-location"> </div>  
     </div> 

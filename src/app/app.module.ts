@@ -52,7 +52,6 @@ import {
    MAT_DIALOG_DATA,
    MatDialogRef,
    MatSlideToggleModule,
-   
 
  } from '@angular/material';
 
@@ -76,6 +75,7 @@ import {
     ReactiveFormsModule,
     HttpClientModule,
     CookieModule.forRoot(),
+
 
     // material
     MatButtonModule,

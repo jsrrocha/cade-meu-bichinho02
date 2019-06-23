@@ -1,3 +1,4 @@
+
 /// <reference types="@types/googlemaps" />
 
 import { Component, ElementRef, NgZone, OnInit, ViewChild,AfterViewInit ,ChangeDetectorRef} from '@angular/core';
@@ -12,10 +13,13 @@ import { AgmOverlays } from "agm-overlays";
 import * as moment from 'moment';
 import swal from 'sweetalert2';
 import { Router, RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //material
 import { MatDialog, MatDialogConfig,MatRadioModule,MatNativeDateModule,MatDividerModule,
-MatListModule,MatPaginatorModule,MatCheckboxModule } from '@angular/material';
+MatListModule,MatPaginatorModule,MatCheckboxModule,MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS,MAT_TOOLTIP_SCROLL_STRATEGY,MatTooltip,
+MatTooltipDefaultOptions } from '@angular/material'; 
+
 
 // Components
 import { LostPetModalComponent } from './modal/lostPet/lostPetModal.component';
@@ -25,7 +29,7 @@ import { CommentModalComponent } from './modal/comment/commentModal.component';
 import { ServiceComponent } from './service.component';
 import { RemovePetModalComponent } from './modal/removePet/removePetModal.component';
 
-export const MY_FORMATS = {
+export const MY_FORMATS = { 
   parse: {
     dateInput: 'LL',
   },
@@ -33,7 +37,7 @@ export const MY_FORMATS = {
     dateInput: 'DD/MM/YYYY',
     monthYearLabel: 'YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
+    monthYearA11yLabel: 'YYYY', 
   },
 };
 
@@ -46,7 +50,7 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit,AfterViewInit{ 
   title = 'tcc';
 
   //Map
@@ -91,6 +95,8 @@ export class AppComponent implements OnInit{
   searchMenuIsOpen;
   startTime;
   endTime;
+  @ViewChild('tooltip') 
+  public tooltip: MatTooltip;
 
   //For edit pet
   petId;
@@ -199,6 +205,12 @@ export class AppComponent implements OnInit{
     }, 15 * 60 * 1000);
   }
 
+  ngAfterViewInit() { 
+     
+     this.tooltip.show();
+     this.cd.detectChanges();
+  }
+
   setDateOfDayInPicker(){
     this.datePicker = new FormControl(new Date());
   }
@@ -206,6 +218,13 @@ export class AppComponent implements OnInit{
   get formFilterPet() {
     return this.formFilter.controls;
   }
+  
+  alert1() {
+    this.tooltip.show();
+    console.log("AQQQQQQQQQQ");
+    alert("AQQQQQQ");
+  } 
+
 
   clearLocal() {
     this.formLocal.controls.searchValue.setValue('');
@@ -429,6 +448,7 @@ export class AppComponent implements OnInit{
   }
 
   petSearch(){
+    this.tooltip.show(999999999);  
     this.appLoading = true;
 
     if(!this.formFilterPet.checkedAllDates.value){
@@ -639,7 +659,7 @@ export class AppComponent implements OnInit{
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '380px';
-    dialogConfig.height = '480px';
+    dialogConfig.height = '430px';
 
     let petSelected = {
          "petId": this.petId,

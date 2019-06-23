@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject,ChangeDetectorRef,AfterViewInit,ViewChild } from '@angular/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {FormBuilder,FormControl, FormGroup,Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
@@ -7,8 +7,9 @@ import swal from 'sweetalert2';
 
 //material
 import { MAT_DIALOG_DATA, MatDialogRef,MatDatepickerModule,
-MatNativeDateModule} from '@angular/material';
+MatNativeDateModule,MatTooltip} from '@angular/material';
 import {DateAdapter, MAT_DATE_FORMATS,MAT_DATE_LOCALE} from '@angular/material/core';
+
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 // Components
@@ -35,11 +36,13 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],   
 })
-export class CommentModalComponent {
+export class CommentModalComponent implements AfterViewInit {
   formComment: FormGroup;
   date;
   user:any; 
   userSendId = null;
+  @ViewChild('tooltip') 
+  public tooltip: MatTooltip;
 
   constructor(
     private dialogRef: MatDialogRef<CommentModalComponent>,
@@ -47,6 +50,7 @@ export class CommentModalComponent {
     private service: ServiceComponent,
     private cookieService:CookieService,
     @Inject(MAT_DIALOG_DATA) private petData: any,
+    private cd: ChangeDetectorRef
     ){
 
     this.formComment = this.formBuilder.group({
@@ -70,6 +74,12 @@ export class CommentModalComponent {
       this.form.phone.setValue(this.cookieService.get('userPhone'));
       this.form.phoneWithWhats.setValue(!!this.cookieService.get('UserPhoneWithWhats'));
     }  
+  }
+
+  ngAfterViewInit() { 
+     
+     this.tooltip.show();
+     this.cd.detectChanges();
   }
 
   setDateOfDayInPick(){
