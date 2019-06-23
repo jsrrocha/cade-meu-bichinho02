@@ -292,6 +292,9 @@ export class LostPetModalComponent implements OnInit,AfterViewInit{
       this.endTime = new Date().getTime();
       var secondsDiff = +(this.endTime - this.startTime) / 1000;
 
+      //adjust hour
+      this.form.date.value.setHours(this.form.date.value.getHours()-3); 
+
       let pet = {
          "name": this.form.name.value,
          "specie": this.form.selectedSpecie.value,

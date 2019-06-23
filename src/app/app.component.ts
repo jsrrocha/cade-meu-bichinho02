@@ -79,8 +79,6 @@ export class AppComponent implements OnInit,AfterViewInit{
   latitude = null;
   longitude = null;
   appLoading = false;
-  datePicker;
-  serializedDate;
   path = "";
   dateFinal;
   userSendId = null;
@@ -135,6 +133,7 @@ export class AppComponent implements OnInit,AfterViewInit{
       furColor: [null,Validators.required],
       description: [null],
       checkedAllDates: [true,Validators.required],
+      date: [new Date(),Validators.required] 
     });
   }
 
@@ -182,10 +181,8 @@ export class AppComponent implements OnInit,AfterViewInit{
           document.querySelector('.filter-container').classList.add("active");
           this.startTime = new Date().getTime(); 
 
-
           //Update list of pets!
           this.petSearch();
-
         });
       });
 
@@ -196,7 +193,6 @@ export class AppComponent implements OnInit,AfterViewInit{
       
     });
 
-    this.setDateOfDayInPicker();
     this.cookieService.put('petId',"");
 
     //Logout after 15 minutes
@@ -206,25 +202,17 @@ export class AppComponent implements OnInit,AfterViewInit{
   }
 
   ngAfterViewInit() { 
-     
+     //adjust hour
+     this.formFilterPet.date.value.setHours(
+     this.formFilterPet.date.value.getHours()-3);
+     //show tooltip
      this.tooltip.show();
      this.cd.detectChanges();
-  }
-
-  setDateOfDayInPicker(){
-    this.datePicker = new FormControl(new Date());
   }
 
   get formFilterPet() {
     return this.formFilter.controls;
   }
-  
-  alert1() {
-    this.tooltip.show();
-    console.log("AQQQQQQQQQQ");
-    alert("AQQQQQQ");
-  } 
-
 
   clearLocal() {
     this.formLocal.controls.searchValue.setValue('');
@@ -448,13 +436,10 @@ export class AppComponent implements OnInit,AfterViewInit{
   }
 
   petSearch(){
-    this.tooltip.show(999999999);  
     this.appLoading = true;
 
-    if(!this.formFilterPet.checkedAllDates.value){
-      this.serializedDate = new FormControl((this.datePicker.value).toISOString());
-
-      this.dateFilter = this.serializedDate.value;
+    if(!this.formFilterPet.checkedAllDates.value){ 
+      this.dateFilter = this.formFilterPet.date.value;
     }else{
       this.dateFilter = null;
     }
@@ -480,7 +465,6 @@ export class AppComponent implements OnInit,AfterViewInit{
 
     this.service.petSearch(pet).subscribe(
     (data:any)=> {
-       
         this.pets = data;
         this.searching = true;
         this.appLoading = false;
