@@ -83,8 +83,8 @@ export class LostPetModalComponent implements OnInit,AfterViewInit{
     private cd: ChangeDetectorRef,
     ){
 
-    this.formPetLost = this.formBuilder.group({
-      name: ['Nome desconhecido', Validators.required],
+    this.formPetLost = this.formBuilder.group({ 
+      name: [null, Validators.required],
       selectedSpecie: [null,Validators.required],
       selectedSex: [null,Validators.required],
       selectedFurColor: [null,Validators.required],
