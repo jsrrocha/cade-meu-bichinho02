@@ -4,7 +4,7 @@ import {HttpClient, HttpParams,
 import swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 
 export class ServiceComponent {
