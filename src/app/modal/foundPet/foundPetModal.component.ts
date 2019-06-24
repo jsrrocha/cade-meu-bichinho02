@@ -121,9 +121,13 @@ export class FoundPetModalComponent implements OnInit,AfterViewInit{
   }
 
   ngAfterViewInit() {
+     //adjust hour
+     this.form.date.value.setHours(
+     this.form.date.value.getHours()-3);
+     
+     //show tooltip
      this.tooltip.show();
-     this.tooltipTwo.show();
-     this.cd.detectChanges();
+     this.cd.detectChanges(); 
   }
 
   get form() {
@@ -323,9 +327,6 @@ export class FoundPetModalComponent implements OnInit,AfterViewInit{
       //calculate performance time
       this.endTime = new Date().getTime();
       var secondsDiff = +(this.endTime - this.startTime) / 1000;
-
-      //adjust hour
-      this.form.date.value.setHours(this.form.date.value.getHours()-3); 
 
       let pet = {
          "name": this.form.name.value,
